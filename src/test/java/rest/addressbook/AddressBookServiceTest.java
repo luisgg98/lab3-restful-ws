@@ -178,8 +178,7 @@ public class AddressBookServiceTest {
     assertEquals(3, ab.getPersonList().size());
 
     // Idempotent: The same response is received for the same request
-    Response second_response = client.target("http://localhost:8282/contacts/person/3")
-            .request().get();
+    Response second_response = client.target("http://localhost:8282/contacts/person/3").request().get();
     assertEquals(200, second_response.getStatus());
     assertEquals(MediaType.APPLICATION_JSON_TYPE, second_response.getMediaType());
     Person new_maria = second_response.readEntity(Person.class);
@@ -230,7 +229,8 @@ public class AddressBookServiceTest {
     assertEquals(2, ab.getPersonList().size());
 
     // Idempotent: The same response is received for the same request
-    Response new_response = client.target("http://localhost:8282/contacts").request(MediaType.APPLICATION_JSON).get();
+    Response new_response = client.target("http://localhost:8282/contacts").request(MediaType.APPLICATION_JSON)
+            .get();
     assertEquals(200, new_response.getStatus());
 
     assertEquals(MediaType.APPLICATION_JSON_TYPE, new_response.getMediaType());
