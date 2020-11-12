@@ -77,7 +77,6 @@ public class AddressBookController {
 
   /**
    * A PUT /contacts/person/{id} should update a entry if exists
-   *
    * @param info   the URI information of the request
    * @param person the posted entity
    * @param id     the unique identifier of a person
