@@ -373,7 +373,7 @@ public class AddressBookServiceTest {
     assertNotEquals(204, new_response.getStatus());
     // Instead, we are getting 404, so it's not idempotent
 
-    assertNotEquals(404, new_response.getStatus());
+    assertEquals(404, new_response.getStatus());
 
     // 404 The requested resource could not be found but may be available in the future.
     // 204 The server successfully processed the request, and is not returning any content.
