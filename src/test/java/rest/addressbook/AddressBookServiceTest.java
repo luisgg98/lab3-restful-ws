@@ -362,12 +362,21 @@ public class AddressBookServiceTest {
     // complete the test to ensure that it is idempotent but not safe
     //////////////////////////////////////////////////////////////////////
 
-    // It's safe because the state has changed
+    // BUG FOUND
+    // It's not safe because the state has changed
     assertNotEquals(2, ab.getPersonList().size());
 
-    // Idempotent: It has to return error (404) because the contacts doesn't exists yet
+    // Idempotent?: As we could see previously the response code was 204
     Response new_response = client.target("http://localhost:8282/contacts/person/2").request().delete();
-    assertEquals(404, new_response.getStatus());
+
+    //However now the code we are receiving it has changed, same request differente response
+    assertNotEquals(204, new_response.getStatus());
+    // Instead, we are getting 404, so it's not idempotent
+
+    assertNotEquals(404, new_response.getStatus());
+
+    // 404 The requested resource could not be found but may be available in the future.
+    // 204 The server successfully processed the request, and is not returning any content.
 
   }
 
